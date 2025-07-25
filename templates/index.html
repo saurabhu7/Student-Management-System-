@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Manager</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h2>Student Management System</h2>
+    <div class="container">
+        <form action="/add" method="post">
+            <input name="roll" placeholder="Roll No" required>
+            <input name="name" placeholder="Name" required>
+            <input name="email" placeholder="Email" required>
+            <select name="gender" required>
+                <option value="">Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+            <input name="contact" placeholder="Contact" required>
+            <input name="dob" placeholder="D.O.B" required>
+            <textarea name="address" placeholder="Address" required></textarea>
+            <button type="submit">Add Student</button>
+        </form>
+
+        <a href="/download" class="download-btn">Download CSV</a>
+
+        <table>
+            <tr>
+                <th>Roll</th><th>Name</th><th>Email</th><th>Gender</th>
+                <th>Contact</th><th>DOB</th><th>Address</th><th>Actions</th>
+            </tr>
+            {% for s in students %}
+            <tr>
+                <td>{{ s['Roll No'] }}</td>
+                <td>{{ s['Name'] }}</td>
+                <td>{{ s['Email'] }}</td>
+                <td>{{ s['Gender'] }}</td>
+                <td>{{ s['Contact'] }}</td>
+                <td>{{ s['DOB'] }}</td>
+                <td>{{ s['Address'] }}</td>
+                <td><a href="/delete/{{ s['Roll No'] }}" onclick="return confirm('Delete student?')">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
